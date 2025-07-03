@@ -3,7 +3,6 @@
 import { Task, Subtask } from '../lib/types';
 import { useRouter } from 'next/navigation';
 import { useTasks } from '../lib/TaskContext';
-import { suggestSubtasks } from '../lib/subtasks';
 
 interface TaskCardProps {
   task: Task;
@@ -20,9 +19,30 @@ export default function TaskCard({ task }: TaskCardProps) {
   };
 
   const handleSuggestSubtasks = async () => {
-    const newSubtasks = await suggestSubtasks(task.title);
-    const updatedTask = { ...task, subtasks: [...(task.subtasks || []), ...newSubtasks] };
-    updateTask(updatedTask);
+    try {
+      const response = await fetch('/api/suggest-subtasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ taskTitle: task.title }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch subtasks');
+      }
+
+      const { subtasks } = await response.json();
+      const newSubtasks: Subtask[] = subtasks.map((title: string) => ({
+        id: crypto.randomUUID(),
+        title,
+        completed: false,
+      }));
+
+      const updatedTask = { ...task, subtasks: [...(task.subtasks || []), ...newSubtasks] };
+      updateTask(updatedTask);
+    } catch (error) {
+      console.error('Error suggesting subtasks:', error);
+      alert('Failed to suggest subtasks. Please try again.');
+    }
   };
 
   const toggleSubtask = (subtaskId: string) => {

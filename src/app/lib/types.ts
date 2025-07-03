@@ -4,8 +4,8 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  status: TaskStatus;
-  dueDate: string; // ISO date string (e.g., "2025-07-10")
+  status: "pending" | "completed";
+  dueDate: string;
   subtasks?: Subtask[];
 }
 
