@@ -2,7 +2,7 @@
 
 import { Task, Subtask } from '../lib/types';
 import { useRouter } from 'next/navigation';
-import { deleteTask } from '../lib/storage';
+import { useTasks } from '../lib/TaskContext';
 import { suggestSubtasks } from '../lib/subtasks';
 
 interface TaskCardProps {
@@ -11,11 +11,11 @@ interface TaskCardProps {
 
 export default function TaskCard({ task }: TaskCardProps) {
   const router = useRouter();
+  const { deleteTask, updateTask } = useTasks();
 
   const handleDelete = () => {
     if (confirm('Are you sure you want to delete this task?')) {
       deleteTask(task.id);
-      router.refresh();
     }
   };
 
@@ -23,7 +23,6 @@ export default function TaskCard({ task }: TaskCardProps) {
     const newSubtasks = await suggestSubtasks(task.title);
     const updatedTask = { ...task, subtasks: [...(task.subtasks || []), ...newSubtasks] };
     updateTask(updatedTask);
-    router.refresh();
   };
 
   const toggleSubtask = (subtaskId: string) => {
@@ -31,7 +30,6 @@ export default function TaskCard({ task }: TaskCardProps) {
       subtask.id === subtaskId ? { ...subtask, completed: !subtask.completed } : subtask
     );
     updateTask({ ...task, subtasks: updatedSubtasks });
-    router.refresh();
   };
 
   return (

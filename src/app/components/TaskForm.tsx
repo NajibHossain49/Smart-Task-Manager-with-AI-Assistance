@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { addTask, updateTask } from "../lib/storage";
+import { useTasks } from "../lib/TaskContext";
 import { Task } from "../lib/types";
 
 interface TaskFormProps {
@@ -11,6 +11,7 @@ interface TaskFormProps {
 
 export default function TaskForm({ task }: TaskFormProps) {
   const router = useRouter();
+  const { addTask, updateTask } = useTasks();
   const [formData, setFormData] = useState({
     title: task?.title || "",
     description: task?.description || "",
@@ -35,7 +36,6 @@ export default function TaskForm({ task }: TaskFormProps) {
       addTask(newTask);
     }
     router.push("/");
-    router.refresh();
   };
 
   return (
