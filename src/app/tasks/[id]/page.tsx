@@ -1,9 +1,19 @@
-import TaskForm from "../../components/TaskForm";
-import { getTasks } from "../../lib/storage";
+'use client';
 
-export default function EditTask({ params }: { params: { id: string } }) {
-  const tasks = getTasks();
-  const task = tasks.find((t) => t.id === params.id);
+import { use, useEffect, useState } from 'react';
+import TaskForm from '../../components/TaskForm';
+import { getTasks } from '../../lib/storage';
+import { Task } from '../../lib/types';
+
+export default function EditTask({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params); // Unwrap params with React.use()
+  const [task, setTask] = useState<Task | null>(null);
+
+  useEffect(() => {
+    const tasks = getTasks();
+    const foundTask = tasks.find((t) => t.id === id);
+    setTask(foundTask || null);
+  }, [id]);
 
   if (!task) {
     return <p className="text-center text-red-500">Task not found</p>;
