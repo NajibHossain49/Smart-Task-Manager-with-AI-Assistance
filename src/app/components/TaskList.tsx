@@ -1,6 +1,6 @@
 'use client';
 
-import { Task } from '@/lib/types';
+import { Task } from '../lib/types';
 import TaskCard from './TaskCard';
 
 interface TaskListProps {
