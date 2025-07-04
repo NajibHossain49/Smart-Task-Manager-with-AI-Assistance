@@ -1,36 +1,128 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Smart Task Manager with AI Assistance
 
-## Getting Started
+A modern task management web application built with **React** and **Next.js 15+** using **TypeScript**, enhanced by **Google Gemini AI** to suggest actionable subtasks. Easily manage your to-dos and boost productivity with smart AI-powered breakdowns.
 
-First, run the development server:
+---
+
+## Live Link 🌐
+
+[Live Link](https://smart-task-manager-with-ai-assistan-dusky.vercel.app)
+
+---
+
+## ✨ Features
+
+- ✅ Add, edit, and delete tasks
+- 📋 Each task includes:
+
+  - Title
+  - Description
+  - Due Date
+  - Status (Pending / Completed)
+
+- 🧠 **AI Subtask Suggestions**
+  Generate 3–5 actionable subtasks for any task using **Google Gemini API**
+- 🖥️ Fully responsive — works across desktops and mobile devices
+- 🛠️ Clean and simple UI
+
+---
+
+## 🧪 Example
+
+**Main Task**: `Plan birthday party`
+**AI Suggestions**:
+
+- Book venue
+- Send invitations
+- Order cake
+- Plan decorations
+- Prepare playlist
+
+---
+
+## 🔧 Technologies Used
+
+- **Next.js 15+** (App Router)
+- **React 19+**
+- **TypeScript**
+- **Tailwind CSS** (CSS framework)
+- **Google Gemini API**
+- **Next.js API Routes** for secure backend integration
+- **Environment Variables** for API key management
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/NajibHossain49/Smart-Task-Manager-with-AI-Assistance.git
+cd Smart-Task-Manager-with-AI-Assistance
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Using `npm` (or switch to `pnpm`/`yarn` if preferred):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+```
 
-## Learn More
+### 3. Set up environment variables
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.env.local` file based on the example provided:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+# .env.local
+GEMINI_API_KEY=your_google_gemini_api_key_here
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+You can get a free Gemini API key from: [https://aistudio.google.com/app/apikey](https://aistudio.google.com/app/apikey)
 
-## Deploy on Vercel
+### 4. Run the development server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
+
+---
+
+## 📂 Folder Structure
+
+```
+/app
+  /api       → API route for Gemini integration
+  /components → Reusable UI components
+  /tasks     → Task list and detail views
+.env.local    → Your API key config
+```
+
+---
+
+## ⚠️ Error Handling
+
+- If the Gemini API call fails, an error message is shown to the user.
+- All AI responses are sanitized and validated before display.
+
+---
+
+## 😅 Challenges Faced
+
+- Integrating the Gemini API securely through server-side routes
+- Handling various AI edge cases (e.g., vague task names)
+- Designing a clean yet responsive UI within a limited timeframe
+- Ensuring TypeScript type safety across both frontend and backend logic
+
+---
+
+## 🧑‍💻 Author
+
+Developed with ❤️ by **Najib Hossain**  
+[GitHub](https://github.com/NajibHossain49) | [LinkedIn](https://www.linkedin.com/in/md-najib-hossain) | [Portfolio](https://najib-hossain.web.app)
+
+## 🌟 Show Your Support
+
+If you like this project, please ⭐ the repository and share it with others!
