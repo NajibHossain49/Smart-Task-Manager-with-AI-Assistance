@@ -83,7 +83,7 @@ You can get a free Gemini API key from: [https://aistudio.google.com/app/apikey]
 ### 4. Run the development server
 
 ```bash
-npm dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
