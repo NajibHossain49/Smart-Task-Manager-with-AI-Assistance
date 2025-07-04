@@ -1,29 +1,32 @@
-// "use client";
+"use client";
 
-// import { useEffect, useState } from "react";
-// import TaskList from "./components/TaskList";
-// import { getTasks } from "./lib/storage";
-// import { Task } from "./lib/types";
-
-// export default function Home() {
-//   const [tasks, setTasks] = useState<Task[]>([]);
-
-//   useEffect(() => {
-//     setTasks(getTasks());
-//   }, []);
-
-//   return <TaskList tasks={tasks} />;
-// }
-// // This component fetches tasks from local storage and displays them using the TaskList component.
-// // It uses the useEffect hook to ensure tasks are fetched only once when the component mounts.
-
-
-'use client';
-
-import { useTasks } from './lib/TaskContext';
-import TaskList from './components/TaskList';
+import { useEffect, useState } from "react";
+import TaskList from "./components/TaskList";
+import { useTasks } from "./lib/TaskContext";
 
 export default function Home() {
   const { tasks } = useTasks();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate brief loading period
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 300); // 300ms delay for "twinkle of an eye" effect
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen ">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500"></div>
+        <p className="mt-4 text-lg font-medium text-gray-700">
+          Loading tasks...
+        </p>
+      </div>
+    );
+  }
+
   return <TaskList tasks={tasks} />;
 }
